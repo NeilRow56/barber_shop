@@ -1,11 +1,18 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from '@/lib/constants'
-import { ThemeProvider } from 'next-themes'
-import { Toaster } from '@/components/ui/toaster'
+import { ClerkProvider } from '@clerk/nextjs'
+import { dark } from '@clerk/themes'
 
-const inter = Inter({ subsets: ['latin'] })
+import { cn } from '@/lib/utils'
+import Providers from '@/components/providers'
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-serif'
+})
 
 export const metadata: Metadata = {
   title: {
@@ -22,18 +29,28 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='light'
-          enableSystem
-          disableTransitionOnChange
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark
+      }}
+    >
+      <html
+        lang='en'
+        suppressHydrationWarning
+        className='scroll-smooth antialiased'
+      >
+        <body
+          className={cn(
+            'flex min-h-screen flex-col font-sans antialiased',
+            inter.variable,
+            playfair.variable
+          )}
         >
-          {children}
-          <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
+          <Providers>
+            <main className='h-full grow'>{children}</main>
+          </Providers>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }

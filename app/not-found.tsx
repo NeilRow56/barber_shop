@@ -1,3 +1,4 @@
+'use client'
 import { Button } from '@/components/ui/button'
 import { APP_NAME } from '@/lib/constants'
 
@@ -7,9 +8,9 @@ const NotFoundPage = () => {
   return (
     <div className='flex min-h-screen flex-col items-center justify-center'>
       <Image
-        src='/images/logo.svg'
-        width={48}
-        height={48}
+        src='/not-found-1024x1024.png'
+        width={96}
+        height={96}
         alt={`${APP_NAME} logo`}
         priority={true}
       />
