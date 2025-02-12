@@ -1,8 +1,9 @@
-// const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+import Hero from '@/components/hero'
 
-const HomePage = () => {
-  // await delay(5000)
-  return <div></div>
+export default function Home() {
+  return (
+    <section className='min-h-80vh'>
+      <Hero />
+    </section>
+  )
 }
-
-export default HomePage

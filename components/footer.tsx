@@ -3,7 +3,7 @@ import Link from 'next/link'
 export default function Footer() {
   return (
     <footer className='py-4'>
-      <div className='container flex flex-col items-center justify-between gap-x-3 gap-y-1 text-center text-sm font-light text-muted-foreground sm:flex-row'>
+      <div className='container mx-auto flex flex-col items-center justify-between gap-x-3 gap-y-1 text-center text-sm font-light text-muted-foreground sm:flex-row'>
         <p>
           <span className='font-serif text-base font-medium text-primary'>
             Blade & Fade

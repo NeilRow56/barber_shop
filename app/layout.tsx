@@ -1,12 +1,11 @@
-import type { Metadata } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
-import './globals.css'
-import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from '@/lib/constants'
-import { ClerkProvider } from '@clerk/nextjs'
-import { dark } from '@clerk/themes'
-
 import { cn } from '@/lib/utils'
+import type { Metadata } from 'next'
+import { dark } from '@clerk/themes'
+import { ClerkProvider } from '@clerk/nextjs'
 import Providers from '@/components/providers'
+import { Inter, Playfair_Display } from 'next/font/google'
+
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 const playfair = Playfair_Display({
@@ -15,12 +14,8 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: {
-    template: `%s | Prostore`,
-    default: APP_NAME
-  },
-  description: APP_DESCRIPTION,
-  metadataBase: new URL(SERVER_URL)
+  title: 'Blade & Fade',
+  description: 'A barbershop in the heart of the city'
 }
 
 export default function RootLayout({
@@ -47,7 +42,7 @@ export default function RootLayout({
           )}
         >
           <Providers>
-            <main className='h-full grow'>{children}</main>
+            <main className='mx-auto h-full grow'>{children}</main>
           </Providers>
         </body>
       </html>
