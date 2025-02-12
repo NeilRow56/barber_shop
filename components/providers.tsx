@@ -12,7 +12,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <ThemeProvider
       enableSystem
       attribute='class'
-      defaultTheme='dark'
+      defaultTheme='sustem'
       disableTransitionOnChange
     >
       <Layout>{children}</Layout>
