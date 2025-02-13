@@ -1,10 +1,8 @@
 import { Webhook } from 'svix'
-import { User } from '@prisma/client'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
 
-import { revalidatePath } from 'next/cache'
-import { createUser, UpdateUser } from '@/lib/actions/users'
+import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
   const SIGNING_SECRET = process.env.SIGNING_SECRET
@@ -57,67 +55,28 @@ export async function POST(req: Request) {
   const eventType = evt.type
 
   if (eventType === 'user.created') {
-    const {
-      id,
-      email_addresses,
-      first_name,
-      last_name,
-      image_url,
-      phone_numbers
-    } = evt.data
+    const { id, username, email_addresses } = evt.data
+    console.log('Our User ', id, username, email_addresses)
+    //call server action to create user to database
 
-    if (!id || !email_addresses || !email_addresses.length) {
-      return new Response('Error occurred -- missing data', {
-        status: 400
-      })
-    }
+    NextResponse.json('User created')
+  }
 
-    const email = email_addresses[0].email_address
-    const phone = phone_numbers ? phone_numbers[0].phone_number : null
+  if (eventType === 'user.deleted') {
+    const { id } = evt.data
+    console.log('Our deleted user details:', id)
 
-    const user = {
-      clerkUserId: id,
-      firstName: first_name,
-      lastName: last_name,
-      email: email,
-      phone: phone,
-      ...(image_url ? { imageUrl: image_url } : {})
-    }
+    //call server action to delete user from database
 
-    try {
-      await createUser(user as User)
-      revalidatePath(`/admin`)
-    } catch (error) {
-      return new Response('Error occurred', {
-        status: 400
-      })
-    }
+    NextResponse.json('deleted successfully')
   }
 
   if (eventType === 'user.updated') {
-    const { id, first_name, last_name, image_url } = evt.data
+    const { id, username, email_addresses } = evt.data
+    console.log('Our updated user details', id, username, email_addresses)
 
-    if (!id) {
-      return new Response('Error occurred -- missing data', {
-        status: 400
-      })
-    }
-
-    const data = {
-      ...(first_name ? { firstName: first_name } : {}),
-      ...(last_name ? { lastName: last_name } : {}),
-      ...(image_url ? { imageUrl: image_url } : {})
-    }
-
-    try {
-      await UpdateUser(id, data)
-      revalidatePath(`/admin`)
-    } catch (error) {
-      return new Response('Error occurred', {
-        status: 400
-      })
-    }
+    //call server action to update user on the database
   }
 
-  return new Response('', { status: 200 })
+  return new Response('everything good', { status: 200 })
 }
