@@ -1,8 +1,6 @@
 import Link from 'next/link'
 import { UserButton } from '@clerk/nextjs'
-import { Menu, Search } from 'lucide-react'
-
-import { Input } from '@/components/ui/input'
+import { Menu } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
@@ -20,7 +18,7 @@ export default function AdminDashboard({
         <nav className='hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6'>
           <Link
             href='/'
-            className='text-primary flex items-center gap-2 text-lg font-semibold md:text-base'
+            className='flex items-center gap-2 text-lg font-semibold text-primary md:text-base'
           >
             B&F
           </Link>
@@ -47,7 +45,7 @@ export default function AdminDashboard({
             <nav className='grid gap-6 text-lg font-medium'>
               <Link
                 href='/'
-                className='text-primary flex items-center gap-2 text-lg font-semibold'
+                className='flex items-center gap-2 text-lg font-semibold text-primary'
               >
                 B&F
               </Link>
