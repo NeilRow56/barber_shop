@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 const NotFoundPage = () => {
   return (
-    <div className='flex min-h-screen flex-col items-center justify-center'>
+    <div className='flex min-h-screen min-w-[600px] flex-col items-center justify-center'>
       <Image
         src='/not-found-1024x1024.png'
         width={96}

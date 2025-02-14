@@ -8,8 +8,11 @@ import pic2 from '@/public/images/leo-haircut.jpg'
 import pic3 from '@/public/images/leo-shave.jpg'
 import pic5 from '@/public/images/leo-junior-haircut.jpg'
 import pic6 from '@/public/images/c-beard.webp'
+import { ArrowBigRight, Signpost } from 'lucide-react'
+import { auth } from '@clerk/nextjs/server'
 
-export default function Hero() {
+export default async function Hero() {
+  const { userId } = await auth()
   return (
     <main className='relative isolate'>
       <svg
@@ -41,6 +44,36 @@ export default function Hero() {
           strokeWidth={0}
         />
       </svg>
+      <div className='mt-24 flex w-full items-center justify-center'>
+        {userId ? (
+          <Link
+            href={`/admin/dashboard`}
+            className='flex items-center justify-center text-blue-600'
+          >
+            {' '}
+            Go to Dashboard
+            <ArrowBigRight />
+          </Link>
+        ) : (
+          <div className='flex flex-col items-center gap-4 sm:flex-row'>
+            <Link
+              className='flex h-10 items-center justify-center gap-2 rounded-full border border-solid border-transparent bg-green-800 px-4 text-sm text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] sm:h-12 sm:px-5 sm:text-base'
+              href='/sign-up'
+              target='_parent'
+              rel='noopener noreferrer'
+            >
+              <Image
+                className='dark:invert'
+                src='/vercel.svg'
+                alt='Vercel logomark'
+                width={20}
+                height={20}
+              />
+              Join now
+            </Link>
+          </div>
+        )}
+      </div>
       <div className='overflow-hidden'>
         <div className='container mx-auto pb-32 pt-36 sm:pt-60 lg:pt-32'>
           <div className='mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center'>
