@@ -1,5 +1,5 @@
 import BackButton from '@/components/back-button'
-import NewMemberForm from '@/components/new-member.foem'
+import NewMemberForm from '@/components/new-member.form'
 
 export default async function NewTeamMember() {
   return (

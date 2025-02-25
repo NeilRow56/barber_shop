@@ -7,14 +7,14 @@ import { revalidatePath } from 'next/cache'
 import { auth } from '@clerk/nextjs/server'
 
 import { NewMemberSchema } from '@/lib/schemas'
-import { getUserById } from './users'
+
 import { prisma } from '../db/prisma'
 
 type NewMemberInputs = z.infer<typeof NewMemberSchema>
 
 export async function createNewMemberAction(data: NewMemberInputs) {
   const { userId } = await auth()
-  console.log(userId)
+
   if (!userId) {
     return { error: 'Unauthorized' }
   }
