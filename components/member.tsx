@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { Provider, User } from '@prisma/client'
 
 import { Badge } from '@/components/ui/badge'
-import { combineName } from '@/lib/db/users'
 
 interface MemberProps {
   member: Provider & {
@@ -18,7 +17,7 @@ export default function Member({ member }: MemberProps) {
         <div className='relative h-72 w-full overflow-hidden bg-muted sm:h-64'>
           <Image
             src={member.imageUrl || (member.user.imageUrl as string)}
-            alt={combineName(member.user) || ''}
+            alt={member.user.name || ''}
             className='object-cover object-center grayscale'
             sizes='25vw'
             priority
@@ -35,7 +34,7 @@ export default function Member({ member }: MemberProps) {
 
       <div className='absolute inset-x-0 bottom-0 translate-y-2 px-6 py-5 text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100'>
         <h3 className='line-clamp-1 text-xl font-semibold tracking-tight text-primary'>
-          {combineName(member.user)}
+          {member.user.name}
         </h3>
 
         <p className='line-clamp-2 text-sm font-light text-white/90'>

@@ -1,14 +1,5 @@
-import prisma from '@/lib/db/prisma'
 import { User } from '@prisma/client'
-
-export async function createUser(data: User) {
-  try {
-    const user = await prisma.user.create({ data })
-    return { user }
-  } catch (error) {
-    return { error }
-  }
-}
+import { prisma } from '../db/prisma'
 
 export async function getUserById({
   id,
@@ -63,9 +54,4 @@ export async function deleteUser(id: string) {
   } catch (error) {
     return { error }
   }
-}
-
-export function combineName(user: User) {
-  const { firstName, lastName } = user
-  return `${firstName} ${lastName}`
 }

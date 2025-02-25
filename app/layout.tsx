@@ -6,6 +6,7 @@ import Providers from '@/components/providers'
 import { Inter, Playfair_Display } from 'next/font/google'
 
 import './globals.css'
+import Header from '@/components/header'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 const playfair = Playfair_Display({
@@ -41,6 +42,7 @@ export default function RootLayout({
             playfair.variable
           )}
         >
+          <Header />
           <Providers>
             <main className='mx-auto h-full grow'>{children}</main>
           </Providers>

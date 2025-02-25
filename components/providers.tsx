@@ -4,8 +4,9 @@ import { usePathname } from 'next/navigation'
 import { ThemeProvider, useTheme } from 'next-themes'
 
 import { Toaster } from '@/components/ui/sonner'
-import Header from './header'
+
 import Footer from './footer'
+import HeaderOne from './header-without-get-user'
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -43,7 +44,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <Header />
+      <HeaderOne />
       {children}
       <Footer />
     </>
